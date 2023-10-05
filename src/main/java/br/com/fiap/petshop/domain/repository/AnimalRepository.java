@@ -5,6 +5,8 @@ import br.com.fiap.petshop.domain.entity.animal.Animal;
 import br.com.fiap.petshop.infra.database.EntityManagerFactoryProvider;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
+import jakarta.persistence.Query;
 
 import java.util.List;
 import java.util.Objects;
@@ -21,9 +23,9 @@ public class AnimalRepository implements Repository<Animal, Long> {
 
     public static AnimalRepository build(EntityManager manager) {
         AnimalRepository result = instance.get();
-        if (Objects.isNull( result )) {
-            AnimalRepository repo = new AnimalRepository( manager );
-            if (instance.compareAndSet( null, repo )) {
+        if (Objects.isNull(result)) {
+            AnimalRepository repo = new AnimalRepository(manager);
+            if (instance.compareAndSet(null, repo)) {
                 result = repo;
             } else {
                 result = instance.get();
@@ -35,31 +37,47 @@ public class AnimalRepository implements Repository<Animal, Long> {
 
     @Override
     public List<Animal> findAll() {
-        return null;
+        List<Animal> list = manager.createQuery("FROM Animal").getResultList();
+        manager.close();
+        return list;
     }
 
     @Override
     public Animal findById(Long id) {
-        return null;
+        Animal animal = manager.find(Animal.class, id);
+        manager.close();
+        return animal;
     }
 
     @Override
     public List<Animal> findByTexto(String texto) {
-        return null;
+        Query query = manager.createQuery("FROM Animal a  WHERE a.nome LIKE :texto");
+        query.setParameter("texto", texto);
+        return query.getResultList();
     }
 
     @Override
     public Animal persist(Animal animal) {
-        return null;
+        manager.getTransaction().begin();
+        manager.persist(animal);
+        manager.getTransaction().commit();
+        manager.close();
+        return animal;
     }
 
     @Override
     public Animal update(Animal animal) {
-        return null;
+        return manager.merge(animal);
     }
 
     @Override
     public boolean delete(Animal animal) {
-        return false;
+        try {
+            manager.remove(animal);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }

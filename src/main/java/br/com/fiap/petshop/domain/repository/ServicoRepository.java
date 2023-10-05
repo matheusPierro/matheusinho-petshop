@@ -1,7 +1,9 @@
 package br.com.fiap.petshop.domain.repository;
 
+import br.com.fiap.petshop.domain.entity.Documento;
 import br.com.fiap.petshop.domain.entity.servico.Servico;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.Query;
 
 import java.util.List;
 import java.util.Objects;
@@ -32,31 +34,48 @@ public class ServicoRepository implements Repository<Servico, Long>{
 
     @Override
     public List<Servico> findAll() {
-        return null;
+        List<Servico> list = manager.createQuery("FROM Servico").getResultList();
+        manager.close();
+        return list;
     }
 
     @Override
     public Servico findById(Long id) {
-        return null;
+        Servico servico = manager.find(Servico.class, id);
+        manager.close();
+        return servico;
     }
 
     @Override
     public List<Servico> findByTexto(String texto) {
-        return null;
+        Query query = manager.createQuery("FROM Servico a  WHERE a.nome LIKE :texto");
+        query.setParameter("texto", texto);
+        List<Servico> list = query.getResultList();
+        return list;
     }
 
     @Override
     public Servico persist(Servico servico) {
-        return null;
+        manager.getTransaction().begin();
+        manager.persist(servico);
+        manager.getTransaction().commit();
+        return servico;
     }
 
     @Override
     public Servico update(Servico servico) {
-        return null;
+        Servico mergedServico = manager.merge(servico);
+        return mergedServico;
     }
 
     @Override
     public boolean delete(Servico servico) {
-        return false;
+        try {
+            manager.remove(servico);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }
