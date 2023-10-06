@@ -2,6 +2,7 @@ package br.com.fiap.petshop.domain.repository;
 
 import br.com.fiap.petshop.domain.entity.Documento;
 import br.com.fiap.petshop.domain.entity.animal.Animal;
+import br.com.fiap.petshop.infra.security.entity.Pessoa;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 
@@ -12,7 +13,7 @@ import java.util.concurrent.atomic.AtomicReference;
 public class DocumentoRepository implements Repository<Documento, Long> {
 
     private static final AtomicReference<DocumentoRepository> instance = new AtomicReference<>();
-    private EntityManager manager;
+    private final EntityManager manager;
 
     private DocumentoRepository(EntityManager manager) {
         this.manager = manager;
@@ -20,9 +21,9 @@ public class DocumentoRepository implements Repository<Documento, Long> {
 
     public static DocumentoRepository build(EntityManager manager) {
         DocumentoRepository result = instance.get();
-        if (Objects.isNull( result )) {
-            DocumentoRepository repo = new DocumentoRepository( manager );
-            if (instance.compareAndSet( null, repo )) {
+        if (Objects.isNull(result)) {
+            DocumentoRepository repo = new DocumentoRepository(manager);
+            if (instance.compareAndSet(null, repo)) {
                 result = repo;
             } else {
                 result = instance.get();
@@ -31,41 +32,55 @@ public class DocumentoRepository implements Repository<Documento, Long> {
         return result;
     }
 
-
     @Override
     public List<Documento> findAll() {
-        List<Documento> list = manager.createQuery("FROM Documento").getResultList();
-        manager.close();
-        return list;
+        return manager.createQuery("From Documento").getResultList();
     }
 
     @Override
     public Documento findById(Long id) {
-        Documento documento = manager.find(Documento.class, id);
-        manager.close();
-        return documento;
-    }
-
-    @Override
-    public List<Documento> findByTexto(String texto) {
-        Query query = manager.createQuery("FROM Documento a  WHERE a.nome LIKE :texto");
-        query.setParameter("texto", texto);
-        List<Documento> list = query.getResultList();
-        return list;
+        return manager.find(Documento.class, id);
     }
 
     @Override
     public Documento persist(Documento documento) {
+        documento.setId(null);
+        // Não posso confiar no usuário preciso pegar os dados do Animal:
         manager.getTransaction().begin();
-        manager.persist(documento);
+        Query query = manager.createQuery("From Pessoa p where p.id =:id");
+        query.setParameter("id", documento.getPessoa().getId());
+        List<Pessoa> list = query.getResultList();
+        list.forEach(documento::setPessoa);
+        documento = manager.merge(documento);
         manager.getTransaction().commit();
         return documento;
     }
 
     @Override
     public Documento update(Documento documento) {
-        Documento mergedDocumento = manager.merge(documento);
-        return mergedDocumento;
+
+        // Será que existe documento com o número informado?
+        Documento d = manager.find(Documento.class, documento.getId());
+        if (Objects.isNull(d))
+            return null;
+
+        // Não posso confiar no usuário preciso pegar os dados do Dono:
+        manager.getTransaction().begin();
+
+        if (Objects.nonNull(documento.getPessoa())) {
+            Query query = manager.createQuery("From Pessoa p where p.id =:id");
+            query.setParameter("id", documento.getPessoa().getId());
+            List<Pessoa> list = query.getResultList();
+            list.forEach(d::setPessoa);
+
+            if (Objects.nonNull(documento.getNumero()) && !documento.getNumero().equals("")) {
+                d.setNumero(documento.getNumero());
+            }
+        }
+
+        documento = manager.merge(d);
+        manager.getTransaction().commit();
+        return documento;
     }
 
     @Override

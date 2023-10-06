@@ -1,5 +1,6 @@
 package br.com.fiap.petshop.domain.service;
 
+import br.com.fiap.petshop.domain.entity.animal.Animal;
 import org.jvnet.hk2.annotations.Contract;
 
 import java.util.List;
@@ -7,16 +8,14 @@ import java.util.List;
 @Contract
 public interface Service<T, U> {
 
-    public List<T> findAll();
+    List<T> findAll();
 
-    public T findById(U id);
+    T findById(U id);
 
-    public List<T> findByName(String texto);
+    T persist(T t);
 
-    public T persist(T t);
+    T update(U id, T t);
 
-    public T update(U id, T t);
-
-    public boolean delete(T t);
+    boolean delete(T t);
 
 }

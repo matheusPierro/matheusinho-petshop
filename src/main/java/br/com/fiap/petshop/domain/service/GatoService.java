@@ -1,9 +1,9 @@
 package br.com.fiap.petshop.domain.service;
 
 import br.com.fiap.petshop.Main;
-import br.com.fiap.petshop.domain.entity.Documento;
 import br.com.fiap.petshop.domain.entity.animal.Animal;
-import br.com.fiap.petshop.domain.repository.DocumentoRepository;
+import br.com.fiap.petshop.domain.entity.animal.Gato;
+import br.com.fiap.petshop.domain.repository.GatoRepository;
 import br.com.fiap.petshop.infra.database.EntityManagerFactoryProvider;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -12,24 +12,25 @@ import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
 
-public class DocumentoService implements Service<Documento, Long> {
+public class GatoService implements Service<Gato, Long> {
 
-    private static final AtomicReference<DocumentoService> instance = new AtomicReference<>();
+    private static final AtomicReference<GatoService> instance = new AtomicReference<>();
 
-    private final DocumentoRepository repository;
+    private final GatoRepository repository;
 
-    private DocumentoService(DocumentoRepository repository) {
-
+    private GatoService(GatoRepository repository) {
         this.repository = repository;
     }
 
-    public static DocumentoService build() {
-        DocumentoService result = instance.get();
+    public static GatoService build() {
+        GatoService result = instance.get();
         if (Objects.isNull( result )) {
             EntityManagerFactory factory = EntityManagerFactoryProvider.of( Main.PERSISTENCE_UNIT ).provide();
             EntityManager manager = factory.createEntityManager();
-            DocumentoRepository repository = DocumentoRepository.build( manager );
-            DocumentoService service = new DocumentoService( repository );
+
+            GatoRepository repository = GatoRepository.build( manager );
+
+            GatoService service = new GatoService( repository );
             if (instance.compareAndSet( null, service )) {
                 result = service;
             } else {
@@ -40,31 +41,33 @@ public class DocumentoService implements Service<Documento, Long> {
     }
 
     @Override
-    public List<Documento> findAll() {
+    public List<Gato> findAll() {
         return repository.findAll();
     }
 
     @Override
-    public Documento findById(Long id) {
+    public Gato findById(Long id) {
         return repository.findById( id );
     }
 
 
     @Override
-    public Documento persist(Documento documento) {
-        return repository.persist( documento );
+    public Gato persist(Gato animal) {
+        animal.setId( null );
+        return repository.persist( animal );
     }
 
+
     @Override
-    public Documento update(Long id, Documento documento) {
+    public Gato update(Long id, Gato animal) {
         var entidade = repository.findById( id );
         if (Objects.isNull( entidade )) return null;
-        documento.setId( id );
-        return repository.update(documento);
+        animal.setId( id );
+        return repository.update( animal );
     }
 
     @Override
-    public boolean delete(Documento documento) {
-        return repository.delete(documento);
+    public boolean delete(Gato animal) {
+        return repository.delete( animal );
     }
 }

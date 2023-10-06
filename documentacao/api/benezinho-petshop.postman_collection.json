@@ -8,60 +8,748 @@
 	},
 	"item": [
 		{
-			"name": "LOGIN Copy",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"username\": \"benefrancis@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "001 - USUÁRIO",
+			"item": [
+				{
+					"name": "PF",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Benefrancis do Nascimento\",\r\n    \"nascimento\": \"1977-03-08\",\r\n    \"cpf\": \"23872891864\",\r\n    \"sexo\": \"MASCULINO\",\r\n    \"email\": \"benefrancis@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/pf",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"pf"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://localhost/api/authorization",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"path": [
-						"api",
-						"authorization"
-					]
+				{
+					"name": "PF",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/pf",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"pf"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PF/id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/pf/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"pf",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PJ",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJhdXRob3JpdGllcyI6W3siaWQiOjEsIm5vbWUiOiJjbGllbnRlIn1dLCJwZXNzb2EiOiJCZW5lZnJhbmNpcyBkbyBOYXNjaW1lbnRvIiwiZXhwIjoxNjk2NTQzMTk2fQ.qLY4VKPgbrFVXjXds-__tfQbBN_x_0N0P6vJcJGy5W4",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "privateKey",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/pj",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"pj"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PJ/id",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJhdXRob3JpdGllcyI6W3siaWQiOjEsIm5vbWUiOiJjbGllbnRlIn1dLCJwZXNzb2EiOiJCZW5lZnJhbmNpcyBkbyBOYXNjaW1lbnRvIiwiZXhwIjoxNjk2NTQzMTk2fQ.qLY4VKPgbrFVXjXds-__tfQbBN_x_0N0P6vJcJGy5W4",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "privateKey",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/pj",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"pj"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PJ",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJhdXRob3JpdGllcyI6W3siaWQiOjEsIm5vbWUiOiJjbGllbnRlIn1dLCJwZXNzb2EiOiJCZW5lZnJhbmNpcyBkbyBOYXNjaW1lbnRvIiwiZXhwIjoxNjk2NjMwOTk1fQ.dX3Lh4s3EEHNHiHU2ntZwjkzIdT-TQRBgC0HD2ptS8w",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "privateKey",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Benezinho Holding SA\",\r\n    \"nascimento\": \"2000-03-08\",\r\n    \"cnpj\": \"010223872891864\",\r\n    \"email\": \"holding@benezinho.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/pj",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"pj"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			],
+			"description": "Você pode cadastrar um novo usuário:\n\n<img src=\"https://content.pstmn.io/f101bef4-96f8-4933-ac5d-7aa1a2f5d807/aW1hZ2UucG5n\" alt=\"Exemplo%20de%20como%20se%20cadastra%20um%20usuário\" width=\"2015\" height=\"531\">"
 		},
 		{
-			"name": "Usuario Copy",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"nome\": \"Benefrancis do Nascimento\",\r\n    \"nascimento\": \"1977-03-08\",\r\n    \"cpf\": \"24878891874\",\r\n    \"sexo\": \"MASCULINO\",\r\n    \"usuario\": {\r\n        \"username\": \"benefrancis@gmail.com\",\r\n        \"password\": \"123456\"\r\n    }\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "002 - Autenticação",
+			"item": [
+				{
+					"name": "LOGIN",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"benefrancis@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/authorization",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"authorization"
+							]
 						}
-					}
+					},
+					"response": []
+				}
+			],
+			"description": "Realize a autenticação na API Benezinho - Petshop\n\n  \n\n<img src=\"https://content.pstmn.io/f82895d8-eefd-49a7-9a6e-de7c9ef3ca26/aW1hZ2UucG5n\" alt=\"Exemplo%20de%20como%20se%20realiza%20uma%20autenticação\" height=\"657\" width=\"2005\">"
+		},
+		{
+			"name": "003 - ANIMAL",
+			"item": [
+				{
+					"name": "PERSISTE",
+					"item": [
+						{
+							"name": "CACHORRO",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"dono\": {\r\n        \"id\": 1\r\n    },\r\n    \"nascimento\": \"2023-10-05\",\r\n    \"nome\": \"Pith\",\r\n    \"raca\": \"Bull\",\r\n    \"servicos\": null,\r\n    \"sexo\": \"FEMININO\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/cachorro",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"cachorro"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GATO",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"dono\": {\r\n        \"id\": 1\r\n    },\r\n    \"nascimento\": \"2020-10-05\",\r\n    \"nome\": \"Miauuuuuuu\",\r\n    \"raca\": \"Ciberiano\",\r\n    \"servicos\": null,\r\n    \"sexo\": \"MASCULINO\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/gato",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"gato"
+									]
+								}
+							},
+							"response": []
+						}
+					]
 				},
-				"url": {
-					"raw": "http://localhost/api/pf",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"path": [
-						"api",
-						"pf"
+				{
+					"name": "CONSULTA",
+					"item": [
+						{
+							"name": "cachorro",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/cachorro",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"cachorro"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "gato",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/api/gato",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"gato"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "UPDATE",
+					"item": [
+						{
+							"name": "CACHORRO",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"dono\": {\r\n        \"id\": 1\r\n    },\r\n    \"nascimento\": \"2023-10-05\",\r\n    \"nome\": \"Pith Bitoca\",\r\n    \"raca\": \"Bull Terrier\",\r\n    \"servicos\": null,\r\n    \"sexo\": \"MASCULINO\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/cachorro/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"cachorro",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GATO",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"dono\": {\r\n        \"id\": 1\r\n    },\r\n    \"nascimento\": \"2023-10-05\",\r\n    \"nome\": \"Ciamês\",\r\n    \"raca\": \"Rasga Saco\",\r\n    \"servicos\": null,\r\n    \"sexo\": \"MASCULINO\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/gato/2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"gato",
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
 					]
 				}
+			],
+			"description": "Aqui você poderá cadastrar o seu Pet:\n\n<img src=\"https://content.pstmn.io/9fb0fe96-2d45-487e-9082-c43f87f34d9a/aW1hZ2UucG5n\" width=\"2010\" height=\"668\">",
+			"auth": {
+				"type": "apikey",
+				"apikey": [
+					{
+						"key": "key",
+						"value": "privateKey",
+						"type": "string"
+					},
+					{
+						"key": "value",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJhdXRob3JpdGllcyI6W3siaWQiOjEsIm5vbWUiOiJjbGllbnRlIn1dLCJwZXNzb2EiOiJCZW5lZnJhbmNpcyBkbyBOYXNjaW1lbnRvIiwiZXhwIjoxNjk2NjI3NTkzfQ.XgaMaN2W0yHar_YbAu6LfldxOy3dXnzit3HudGGU7-4",
+						"type": "string"
+					}
+				]
 			},
-			"response": []
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "004 - SERVICO",
+			"item": [
+				{
+					"name": "BANHO",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/banho",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"banho"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "BANHO/id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/banho/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"banho",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "BANHO",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"animal\": {\r\n        \"id\": 1\r\n    },\r\n    \"descricao\": \"Banho de Perfume\",\r\n    \"valor\": 50\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/banho",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"banho"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TOSA",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"animal\": {\r\n        \"id\": 1\r\n    },\r\n    \"descricao\": \"Tosa na Régua\",\r\n    \"valor\": 459\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/tosa",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"tosa"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TOSA",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/tosa",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"tosa"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TOSA/id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/tosa/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"tosa",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CONSULTA",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"animal\": {\r\n        \"id\": 1\r\n    },\r\n    \"descricao\": \"Consulta com o Dr. Dolittle\",\r\n    \"valor\": 1500\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/consulta",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"consulta"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CONSULTA/id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/consulta/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"consulta",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CONSULTA",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/consulta",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"consulta"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CONSULTA",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"animal\": {\r\n        \"id\": 1\r\n    },\r\n    \"descricao\": \"Consulta com o Dr. Dolittle\",\r\n    \"valor\": 300\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/consulta/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"consulta",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "BANHO",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"animal\": {\r\n        \"id\": 1\r\n    },\r\n    \"descricao\": \"Banho de Perfume de laranja\",\r\n    \"valor\": 150\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/banho/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"banho",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TOSA",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"animal\": {\r\n        \"id\": 1\r\n    },\r\n    \"descricao\": \"Tosa na Régua e no compasso\",\r\n    \"valor\": 49\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/tosa/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"tosa",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Aqui é possível realizar o cadastramento de um serviço prestado pelo Petshop:  \n  \n\n<img src=\"https://content.pstmn.io/e3b75eff-25cc-4224-a7ed-8fa59ff4af1c/aW1hZ2UucG5n\" alt=\"Exemplo%20do%20cadastramento%20de%20um%20serviço\" height=\"781\" width=\"2015\">"
 		}
 	]
 }

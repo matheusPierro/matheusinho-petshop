@@ -12,7 +12,7 @@ public class PessoaJuridicaService implements Service<PessoaJuridica, Long> {
 
     private static volatile PessoaJuridicaService instance;
 
-    private PessoaJuridicaRepository repo;
+    private final PessoaJuridicaRepository repo;
 
     private PessoaJuridicaService(PessoaJuridicaRepository repo) {
         this.repo = repo;

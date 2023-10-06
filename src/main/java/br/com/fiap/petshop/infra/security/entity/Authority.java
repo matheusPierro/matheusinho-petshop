@@ -23,8 +23,8 @@ public class Authority {
     private String nome;
 
 
-    @ManyToMany(mappedBy = "authorities", fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private Set<Usuario> usuario = new LinkedHashSet<>();
+//    @ManyToMany(mappedBy = "authorities", fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+//    private Set<Usuario> usuario = new LinkedHashSet<>();
 
     public Authority() {
     }

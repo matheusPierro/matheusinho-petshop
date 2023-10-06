@@ -1,6 +1,8 @@
 package br.com.fiap.petshop.infra.security.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 
 import java.time.LocalDate;
 
@@ -8,11 +10,11 @@ import java.time.LocalDate;
 @Table(name = "TB_PESSOA")
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "TP_PESSOA")
-public abstract class Pessoa {
+public  class Pessoa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SQ_PESSOA")
-    @SequenceGenerator( name = "SQ_PESSOA", sequenceName = "SQ_PESSOA", allocationSize = 1, initialValue = 1)
+    @SequenceGenerator(name = "SQ_PESSOA", sequenceName = "SQ_PESSOA", allocationSize = 1, initialValue = 1)
     @Column(name = "ID_PESSOA")
     private Long id;
 
@@ -22,13 +24,23 @@ public abstract class Pessoa {
     @Column(name = "DT_NASCIMENTO")
     private LocalDate nascimento;
 
-    public Pessoa() {
+    @Email
+    @Column(name = "EMAIL")
+    private String email;
+
+    @Transient
+    @Column(name = "PASSWORD", insertable = false)
+    private String password;
+
+    protected Pessoa() {
     }
 
-    public Pessoa(Long id, String nome, LocalDate nascimento) {
+    protected Pessoa(Long id, String nome, LocalDate nascimento, String email, String password) {
         this.id = id;
         this.nome = nome;
         this.nascimento = nascimento;
+        this.email = email;
+        this.password = password;
     }
 
     public Long getId() {
@@ -49,6 +61,15 @@ public abstract class Pessoa {
         return this;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public Pessoa setEmail(String email) {
+        this.email = email;
+        return this;
+    }
+
     public LocalDate getNascimento() {
         return nascimento;
     }
@@ -58,6 +79,14 @@ public abstract class Pessoa {
         return this;
     }
 
+    public Pessoa setPassword(String password) {
+        this.password = password;
+        return this;
+    }
+
+    public String getPassword() {
+        return password;
+    }
 
     @Override
     public String toString() {
@@ -65,6 +94,7 @@ public abstract class Pessoa {
                 "id=" + id +
                 ", nome='" + nome + '\'' +
                 ", nascimento=" + nascimento +
+                ", email='" + email + '\'' +
                 '}';
     }
 }

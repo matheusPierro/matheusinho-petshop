@@ -1,9 +1,8 @@
 package br.com.fiap.petshop.domain.service;
 
 import br.com.fiap.petshop.Main;
-import br.com.fiap.petshop.domain.entity.Telefone;
-import br.com.fiap.petshop.domain.entity.animal.Animal;
-import br.com.fiap.petshop.domain.repository.TelefoneRepository;
+import br.com.fiap.petshop.domain.entity.servico.Consulta;
+import br.com.fiap.petshop.domain.repository.ConsultaRepository;
 import br.com.fiap.petshop.infra.database.EntityManagerFactoryProvider;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -12,24 +11,24 @@ import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
 
-public class TelefoneService implements Service<Telefone, Long> {
+public class ConsultaService implements Service<Consulta, Long> {
 
-    private static final AtomicReference<TelefoneService> instance = new AtomicReference<>();
+    private static final AtomicReference<ConsultaService> instance = new AtomicReference<>();
 
-    private final TelefoneRepository repository;
+    private final ConsultaRepository repository;
 
-    private TelefoneService(TelefoneRepository repository) {
+    private ConsultaService(ConsultaRepository repository) {
 
         this.repository = repository;
     }
 
-    public static TelefoneService build() {
-        TelefoneService result = instance.get();
+    public static ConsultaService build() {
+        ConsultaService result = instance.get();
         if (Objects.isNull( result )) {
             EntityManagerFactory factory = EntityManagerFactoryProvider.of( Main.PERSISTENCE_UNIT ).provide();
             EntityManager manager = factory.createEntityManager();
-            TelefoneRepository repository = TelefoneRepository.build( manager );
-            TelefoneService service = new TelefoneService( repository );
+            ConsultaRepository repository = ConsultaRepository.build( manager );
+            ConsultaService service = new ConsultaService( repository );
             if (instance.compareAndSet( null, service )) {
                 result = service;
             } else {
@@ -40,31 +39,30 @@ public class TelefoneService implements Service<Telefone, Long> {
     }
 
     @Override
-    public List<Telefone> findAll() {
+    public List<Consulta> findAll() {
         return repository.findAll();
     }
 
     @Override
-    public Telefone findById(Long id) {
+    public Consulta findById(Long id) {
         return repository.findById( id );
     }
 
-
     @Override
-    public Telefone persist(Telefone telefone) {
-        return repository.persist( telefone );
+    public Consulta persist(Consulta consulta) {
+        return repository.persist( consulta );
     }
 
     @Override
-    public Telefone update(Long id, Telefone telefone) {
+    public Consulta update(Long id, Consulta consulta) {
         var entidade = repository.findById( id );
         if (Objects.isNull( entidade )) return null;
-        telefone.setId( id );
-        return repository.update(telefone);
+        consulta.setId( id );
+        return repository.update(consulta);
     }
 
     @Override
-    public boolean delete(Telefone telefone) {
-        return repository.delete(telefone);
+    public boolean delete(Consulta consulta) {
+        return repository.delete(consulta);
     }
 }

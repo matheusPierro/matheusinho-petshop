@@ -7,12 +7,12 @@ import java.util.List;
 @Contract
 public interface Service<T, U> {
 
-    public List<T> findAll();
+    List<T> findAll();
 
-    public T findById(U id);
+    T findById(U id);
 
-    public List<T> findByName(String texto);
+    List<T> findByName(String texto);
 
-    public T persist(T t);
+    T persist(T t);
 
 }

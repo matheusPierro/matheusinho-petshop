@@ -12,12 +12,12 @@ public interface Resource<T, U> {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response findAll();
+    Response findAll();
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response findById(U id);
+    Response findById(U id);
 
     @POST
-    public Response persist(T t);
+    Response persist(T t);
 }

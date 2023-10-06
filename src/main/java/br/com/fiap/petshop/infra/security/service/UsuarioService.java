@@ -16,9 +16,9 @@ public class UsuarioService implements Service<Usuario, Long> {
 
     private static volatile UsuarioService instance;
 
-    private UsuarioRepository repo;
+    private final UsuarioRepository repo;
 
-    private PessoaFisicaRepository pfRepo;
+    private final PessoaFisicaRepository pfRepo;
 
     private UsuarioService(UsuarioRepository repo, PessoaFisicaRepository pfRepo) {
         this.repo = repo;

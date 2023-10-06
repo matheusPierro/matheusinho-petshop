@@ -1,9 +1,8 @@
 package br.com.fiap.petshop.domain.service;
 
 import br.com.fiap.petshop.Main;
-import br.com.fiap.petshop.domain.entity.Telefone;
-import br.com.fiap.petshop.domain.entity.animal.Animal;
-import br.com.fiap.petshop.domain.repository.TelefoneRepository;
+import br.com.fiap.petshop.domain.entity.servico.Tosa;
+import br.com.fiap.petshop.domain.repository.TosaRepository;
 import br.com.fiap.petshop.infra.database.EntityManagerFactoryProvider;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -12,24 +11,23 @@ import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
 
-public class TelefoneService implements Service<Telefone, Long> {
+public class TosaService implements Service<Tosa, Long> {
 
-    private static final AtomicReference<TelefoneService> instance = new AtomicReference<>();
+    private static final AtomicReference<TosaService> instance = new AtomicReference<>();
 
-    private final TelefoneRepository repository;
+    private final TosaRepository repository;
 
-    private TelefoneService(TelefoneRepository repository) {
-
+    private TosaService(TosaRepository repository) {
         this.repository = repository;
     }
 
-    public static TelefoneService build() {
-        TelefoneService result = instance.get();
+    public static TosaService build() {
+        TosaService result = instance.get();
         if (Objects.isNull( result )) {
             EntityManagerFactory factory = EntityManagerFactoryProvider.of( Main.PERSISTENCE_UNIT ).provide();
             EntityManager manager = factory.createEntityManager();
-            TelefoneRepository repository = TelefoneRepository.build( manager );
-            TelefoneService service = new TelefoneService( repository );
+            TosaRepository repository = TosaRepository.build( manager );
+            TosaService service = new TosaService( repository );
             if (instance.compareAndSet( null, service )) {
                 result = service;
             } else {
@@ -40,31 +38,30 @@ public class TelefoneService implements Service<Telefone, Long> {
     }
 
     @Override
-    public List<Telefone> findAll() {
+    public List<Tosa> findAll() {
         return repository.findAll();
     }
 
     @Override
-    public Telefone findById(Long id) {
+    public Tosa findById(Long id) {
         return repository.findById( id );
     }
 
-
     @Override
-    public Telefone persist(Telefone telefone) {
-        return repository.persist( telefone );
+    public Tosa persist(Tosa tosa) {
+        return repository.persist( tosa );
     }
 
     @Override
-    public Telefone update(Long id, Telefone telefone) {
+    public Tosa update(Long id, Tosa tosa) {
         var entidade = repository.findById( id );
         if (Objects.isNull( entidade )) return null;
-        telefone.setId( id );
-        return repository.update(telefone);
+        tosa.setId( id );
+        return repository.update( tosa );
     }
 
     @Override
-    public boolean delete(Telefone telefone) {
-        return repository.delete(telefone);
+    public boolean delete(Tosa tosa) {
+        return repository.delete( tosa );
     }
 }

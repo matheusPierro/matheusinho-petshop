@@ -12,7 +12,7 @@ public class AuthorityRepository implements Repository<Authority, Long> {
 
     private static volatile AuthorityRepository instance;
 
-    private EntityManager manager;
+    private final EntityManager manager;
 
     private AuthorityRepository(EntityManager manager) {
         this.manager = manager;

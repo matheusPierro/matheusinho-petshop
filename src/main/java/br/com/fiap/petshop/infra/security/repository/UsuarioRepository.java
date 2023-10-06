@@ -11,7 +11,7 @@ public class UsuarioRepository implements Repository<Usuario, Long> {
 
     private static volatile UsuarioRepository instance;
 
-    private EntityManager manager;
+    private final EntityManager manager;
 
     private UsuarioRepository(EntityManager manager) {
         this.manager = manager;
@@ -29,9 +29,9 @@ public class UsuarioRepository implements Repository<Usuario, Long> {
     }
 
     public Usuario findByUsername(String username) {
-        String jpql = "SELECT u FROM Usuario u  where u.username =?1";
+        String jpql = "SELECT u FROM Usuario u  where u.username =:username";
         Query query = manager.createQuery(jpql);
-        query.setParameter(1, username);
+        query.setParameter("username", username);
         Usuario usuario = (Usuario) query.getSingleResult();
         return usuario;
     }

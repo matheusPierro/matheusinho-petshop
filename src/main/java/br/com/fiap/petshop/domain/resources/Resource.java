@@ -10,14 +10,14 @@ import org.jvnet.hk2.annotations.Contract;
 @Contract
 public interface Resource<T, U> {
 
-    public Response findAll();
+    Response findAll();
 
-    public Response findById(U id);
+    Response findById(U id);
 
-    public Response persist(T t);
+    Response persist(T t);
 
-    public Response update(U id, T t);
+    Response update(U id, T t);
 
-    public Response delete(T t);
+    Response delete(T t);
 
 }

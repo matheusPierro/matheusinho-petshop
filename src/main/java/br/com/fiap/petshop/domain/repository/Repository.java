@@ -7,16 +7,14 @@ import java.util.List;
 @Contract
 public interface Repository<T, U> {
 
-    public List<T> findAll();
+    List<T> findAll();
 
-    public T findById(U id);
+    T findById(U id);
 
-    public List<T> findByTexto(String texto);
+    T persist(T t);
 
-    public T persist(T t);
+    T update(T t);
 
-    public T update(T t);
-
-    public boolean delete(T t);
+    boolean delete(T t);
 
 }

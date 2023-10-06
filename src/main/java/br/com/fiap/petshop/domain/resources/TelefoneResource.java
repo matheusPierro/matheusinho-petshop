@@ -15,13 +15,9 @@ import java.util.Objects;
 @Consumes(MediaType.APPLICATION_JSON)
 public class TelefoneResource implements Resource<Telefone, Long> {
 
-
     @Context
-    UriInfo uriInfo;
-
-
-    TelefoneService service = TelefoneService.build();
-
+    private UriInfo uriInfo;
+    private TelefoneService service = TelefoneService.build();
 
     @GET
     @Override
@@ -33,7 +29,7 @@ public class TelefoneResource implements Resource<Telefone, Long> {
     @GET
     @Path("/{id}")
     @Override
-    public Response findById(@PathParam( "id" ) Long id) {
+    public Response findById(@PathParam("id") Long id) {
         var telefone = service.findById( id );
         if (Objects.isNull( telefone )) return Response.status( 404 ).build();
         return Response.ok( telefone ).build();

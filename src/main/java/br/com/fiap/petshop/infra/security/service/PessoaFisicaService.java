@@ -13,7 +13,7 @@ public class PessoaFisicaService implements Service<PessoaFisica, Long> {
 
     private static volatile PessoaFisicaService instance;
 
-    private PessoaFisicaRepository repo;
+    private final PessoaFisicaRepository repo;
 
 
     private PessoaFisicaService(PessoaFisicaRepository repo) {
@@ -27,6 +27,7 @@ public class PessoaFisicaService implements Service<PessoaFisica, Long> {
 
         synchronized (PessoaFisicaService.class) {
             if (Objects.isNull(instance)) {
+
                 EntityManagerFactory factory = EntityManagerFactoryProvider.of(persistenceUnit).provide();
 
                 PessoaFisicaRepository pessoaRepository = PessoaFisicaRepository.build(factory.createEntityManager());
@@ -56,10 +57,10 @@ public class PessoaFisicaService implements Service<PessoaFisica, Long> {
 
     @Override
     public PessoaFisica persist(PessoaFisica pessoa) {
-        if (Objects.isNull(pessoa) || Objects.isNull(pessoa.getUsuario())) return null;
-        var pass = Password.encoder(pessoa.getUsuario().getPassword());
-        pessoa.getUsuario().setPassword(pass);
-        pessoa.getUsuario().setPessoa(pessoa);
+        if (Objects.isNull(pessoa) ) return null;
+//        var pass = Password.encoder(pessoa.getUsuario().getPassword());
+//        pessoa.getUsuario().setPassword(pass);
+//        pessoa.getUsuario().setPessoa(pessoa);
         PessoaFisica persisted = repo.persist(pessoa);
         return persisted;
     }

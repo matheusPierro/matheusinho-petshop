@@ -18,7 +18,7 @@ public class PessoaFisicaResource implements Resource<PessoaFisicaDTO, Long> {
     @Context
     UriInfo uriInfo;
 
-    private PessoaFisicaService service = PessoaFisicaService.of( Main.PERSISTENCE_UNIT );
+    private final PessoaFisicaService service = PessoaFisicaService.of( Main.PERSISTENCE_UNIT );
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)

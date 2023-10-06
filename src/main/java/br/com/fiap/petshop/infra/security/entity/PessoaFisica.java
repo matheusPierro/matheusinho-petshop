@@ -2,7 +2,6 @@ package br.com.fiap.petshop.infra.security.entity;
 
 import br.com.fiap.petshop.domain.entity.Sexo;
 import jakarta.persistence.*;
-import org.hibernate.validator.constraints.br.CPF;
 
 import java.time.LocalDate;
 
@@ -17,8 +16,8 @@ public class PessoaFisica extends Pessoa {
     @Column(name = "NR_CPF", nullable = false)
     private String cpf;
 
-    @OneToOne(mappedBy = "pessoa", fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private Usuario usuario;
+//    @OneToOne(mappedBy = "pessoa", fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+//    private Usuario usuario;
 
     @Enumerated(EnumType.STRING)
     private Sexo sexo;
@@ -26,10 +25,9 @@ public class PessoaFisica extends Pessoa {
     public PessoaFisica() {
     }
 
-    public PessoaFisica(Long id, String nome, LocalDate nascimento, Sexo sexo, String cpf, Usuario usuario ) {
-        super( id, nome, nascimento );
+    public PessoaFisica(Long id, String nome, LocalDate nascimento, String email, String password, Sexo sexo, String cpf) {
+        super( id, nome, nascimento, email, password );
         this.cpf = cpf;
-        this.usuario = usuario;
         this.sexo = sexo;
     }
 
@@ -42,14 +40,6 @@ public class PessoaFisica extends Pessoa {
         return this;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public PessoaFisica setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-        return this;
-    }
 
     public Sexo getSexo() {
         return sexo;
@@ -65,7 +55,6 @@ public class PessoaFisica extends Pessoa {
     public String toString() {
         return "PessoaFisica{" +
                 "cpf='" + cpf + '\'' +
-                ", usuario=" + usuario +
                 ", sexo=" + sexo +
                 "} " + super.toString();
     }

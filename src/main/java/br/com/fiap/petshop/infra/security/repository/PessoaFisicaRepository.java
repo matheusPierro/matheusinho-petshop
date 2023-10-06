@@ -1,7 +1,9 @@
 package br.com.fiap.petshop.infra.security.repository;
 
+import br.com.fiap.petshop.infra.configuration.criptografia.Password;
 import br.com.fiap.petshop.infra.security.entity.Authority;
 import br.com.fiap.petshop.infra.security.entity.PessoaFisica;
+import br.com.fiap.petshop.infra.security.entity.Usuario;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 
@@ -12,9 +14,9 @@ public class PessoaFisicaRepository implements Repository<PessoaFisica, Long> {
 
     private static volatile PessoaFisicaRepository instance;
 
-    private AuthorityRepository authorityRepository;
+    private final AuthorityRepository authorityRepository;
 
-    private EntityManager manager;
+    private final EntityManager manager;
 
     private PessoaFisicaRepository(EntityManager manager) {
         this.manager = manager;
@@ -57,11 +59,25 @@ public class PessoaFisicaRepository implements Repository<PessoaFisica, Long> {
 
     @Override
     public PessoaFisica persist(PessoaFisica pessoa) {
+
         manager.getTransaction().begin();
+
+        Usuario usuario = new Usuario();
+        usuario.setUsername( pessoa.getEmail());
+        usuario.setPassword( Password.encoder(  pessoa.getPassword()) );
+        usuario.setPessoa( pessoa );
+
         List<Authority> authorities = authorityRepository.findByName("cliente");
-        authorities.forEach(pessoa.getUsuario()::addAuthority);
-        manager.persist(pessoa);
+
+        if(authorities.size()==0){
+            Authority cli = new Authority();
+            cli.setNome("cliente");
+            authorities.add( cli );
+        }
+        authorities.forEach(usuario::addAuthority);
+        manager.persist(usuario);
         manager.getTransaction().commit();
+
         return pessoa;
     }
 }

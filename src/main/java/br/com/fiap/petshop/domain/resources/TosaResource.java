@@ -1,7 +1,7 @@
 package br.com.fiap.petshop.domain.resources;
 
-import br.com.fiap.petshop.domain.entity.Documento;
-import br.com.fiap.petshop.domain.service.DocumentoService;
+import br.com.fiap.petshop.domain.entity.servico.Tosa;
+import br.com.fiap.petshop.domain.service.TosaService;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.*;
 
@@ -10,20 +10,20 @@ import java.util.List;
 import java.util.Objects;
 
 
-@Path("/documento")
+@Path("/tosa")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class DocumentoResource implements Resource<Documento, Long> {
+public class TosaResource implements Resource<Tosa, Long> {
 
     @Context
     private UriInfo uriInfo;
 
-    private DocumentoService service = DocumentoService.build();
+    private TosaService service = TosaService.build();
 
     @GET
     @Override
     public Response findAll() {
-        List<Documento> all = service.findAll();
+        List<Tosa> all = service.findAll();
         return Response.ok( all ).build();
     }
 
@@ -31,17 +31,16 @@ public class DocumentoResource implements Resource<Documento, Long> {
     @Path("/{id}")
     @Override
     public Response findById(@PathParam("id") Long id) {
-        var documento = service.findById( id );
-        if (Objects.isNull( documento )) return Response.status( 404 ).build();
-        return Response.ok( documento ).build();
-
+        var tosa = service.findById( id );
+        if (Objects.isNull( tosa )) return Response.status( 404 ).build();
+        return Response.ok( tosa ).build();
     }
 
 
     @POST
     @Override
-    public Response persist(Documento documento) {
-        var entity = service.persist( documento );
+    public Response persist(Tosa tosa) {
+        var entity = service.persist( tosa );
         //Criando a URI da requisição
         UriBuilder ub = uriInfo.getAbsolutePathBuilder();
         URI uri = ub.path( String.valueOf( entity.getId() ) ).build();
@@ -51,16 +50,16 @@ public class DocumentoResource implements Resource<Documento, Long> {
     @PUT
     @Path("/{id}")
     @Override
-    public Response update(@PathParam("id") Long id, Documento documento) {
-        Documento updated = service.update( id, documento );
+    public Response update(@PathParam("id") Long id, Tosa tosa) {
+        Tosa updated = service.update( id, tosa );
         if (Objects.isNull( updated )) return Response.notModified().build();
         return Response.ok( updated ).build();
     }
 
     @DELETE
     @Override
-    public Response delete(Documento documento) {
-        var updated = service.delete( documento );
+    public Response delete(Tosa tosa) {
+        var updated = service.delete( tosa );
         if (updated) return Response.notModified().build();
         return Response.ok( updated ).build();
     }

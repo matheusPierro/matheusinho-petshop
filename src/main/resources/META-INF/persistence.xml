@@ -13,9 +13,10 @@
             <property name="jakarta.persistence.jdbc.password" value="080903" />
             <!--hibernate-->
             <property name="hibernate.dialect" value="org.hibernate.dialect.OracleDialect"/>
-            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
             <property name="hibernate.show_sql" value="true"/>
-            <property name="hibernate.format_sql" value="true"/>
+            <property name="hibernate.format_sql" value="false"/>
+
             <!-- hikari CP -->
             <property name="hibernate.connection.provider_class" value="org.hibernate.hikaricp.internal.HikariCPConnectionProvider" />
             <property name="hibernate.hikari.minimumIdle" value="1" />

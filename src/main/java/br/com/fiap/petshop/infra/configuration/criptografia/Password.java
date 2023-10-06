@@ -3,6 +3,7 @@ package br.com.fiap.petshop.infra.configuration.criptografia;
 import jakarta.enterprise.context.ApplicationScoped;
 
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -27,7 +28,7 @@ public class Password {
         StringBuilder hexPass = new StringBuilder();
         try {
             algorithm = MessageDigest.getInstance( "SHA-256" );
-            byte messageDigestPass[] = algorithm.digest( pass.getBytes( "UTF-8" ) );
+            byte[] messageDigestPass = algorithm.digest( pass.getBytes( StandardCharsets.UTF_8 ) );
 
             //Transformando em hexadecimal
             for (byte b : messageDigestPass) {
@@ -36,8 +37,6 @@ public class Password {
 
         } catch (NoSuchAlgorithmException e) {
             System.err.println( "Não foi possível utilizar o algoritmo" + algorithm.getAlgorithm() + ":\n" + e.getMessage() );
-        } catch (UnsupportedEncodingException e) {
-            System.err.println( "Não foi possível fazer o encoding para UTF-8:\n" + e.getMessage() );
         }
 
         return hexPass.toString();

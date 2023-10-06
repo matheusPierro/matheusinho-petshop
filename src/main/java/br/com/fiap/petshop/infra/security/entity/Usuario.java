@@ -29,7 +29,7 @@ public class Usuario {
 
     @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "PESSOA", referencedColumnName = "ID_PESSOA", foreignKey = @ForeignKey(name = "FK_USER_PESSOA"))
-    private PessoaFisica pessoa;
+    private Pessoa pessoa;
 
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
@@ -84,11 +84,11 @@ public class Usuario {
         return this;
     }
 
-    public PessoaFisica getPessoa() {
+    public Pessoa getPessoa() {
         return pessoa;
     }
 
-    public Usuario setPessoa(PessoaFisica pessoa) {
+    public Usuario setPessoa(Pessoa pessoa) {
         this.pessoa = pessoa;
         return this;
     }

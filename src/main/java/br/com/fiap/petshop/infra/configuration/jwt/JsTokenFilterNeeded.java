@@ -20,7 +20,7 @@ public class JsTokenFilterNeeded implements ContainerRequestFilter {
 
     private static final String PRIVATE_KEY = "privateKey";
 
-    private JwTokenHelper jwTokenHelper = JwTokenHelper.getInstance();
+    private final JwTokenHelper jwTokenHelper = JwTokenHelper.getInstance();
 
     @Override
     public void filter(ContainerRequestContext requestContext) {
